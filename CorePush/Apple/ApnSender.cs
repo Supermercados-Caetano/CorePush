@@ -98,12 +98,11 @@ public class ApnSender : IApnSender
         using var response = await http.SendAsync(message, cancellationToken);
             
         var success = response.IsSuccessStatusCode;
-        var content = await response.Content.ReadAsStringAsync(cancellationToken);
 
         return new ApnsResponse
         {
             IsSuccess = success,
-            Error = success ? null : serializer.Deserialize<ApnsError>(content)
+            Error = success ? null : serializer.Deserialize<ApnsError>(await response.Content.ReadAsStringAsync(cancellationToken))
         };
     }
 
