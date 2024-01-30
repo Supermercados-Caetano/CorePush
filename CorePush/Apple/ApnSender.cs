@@ -22,7 +22,7 @@ namespace CorePush.Apple;
 public class ApnSender : IApnSender
 {
     private static readonly ConcurrentDictionary<string, Tuple<string, DateTime>> tokens = new();
-    private static readonly Dictionary<ApnServerType, string> servers = new()
+    public static readonly Dictionary<ApnServerType, string> servers = new()
     {
         {ApnServerType.Development, "https://api.development.push.apple.com:443" },
         {ApnServerType.Production, "https://api.push.apple.com:443" }
